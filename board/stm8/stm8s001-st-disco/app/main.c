@@ -27,18 +27,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm8s.h"
-
-/**
-  * @addtogroup GPIO_Toggle
-  * @{
-  */
-
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Evalboard I/Os configuration */
-
-#define LED_GPIO_PORT  (GPIOA)
-#define LED_GPIO_PINS  (GPIO_PIN_3)
+#include "bsp_led.h"
+#include "bsp_exit.h"
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -55,15 +45,11 @@ void Delay (uint16_t nCount);
   */
 void main(void)
 {
-
-  /* Initialize I/Os in Output Mode */
-  GPIO_Init(LED_GPIO_PORT, (GPIO_Pin_TypeDef)LED_GPIO_PINS, GPIO_MODE_OUT_PP_LOW_FAST);
-
+  led_init();
+  button_init();
   while (1)
   {
-    /* Toggles LEDs */
-    GPIO_WriteReverse(LED_GPIO_PORT, (GPIO_Pin_TypeDef)LED_GPIO_PINS);
-    Delay(0xFFFF);
+   
   }
 
 }
