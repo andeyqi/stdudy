@@ -133,10 +133,15 @@ INTERRUPT_HANDLER(EXTI_PORTB_IRQHandler, 4)
   */
 INTERRUPT_HANDLER(EXTI_PORTC_IRQHandler, 5)
 {
+  /*
+  volatile unsigned int i =1000;
+  while(i--);
+  */
   /* In order to detect unexpected events during development,
      it is recommended to set a breakpoint on the following instruction.
   */
-  led_toggles();
+  /* 上升沿触发中断,点亮LED 下降沿触发中断,熄灭LED */
+  (GPIO_ReadInputPin(GPIOC,GPIO_PIN_3) != RESET) ?(led_on()):(led_off());
 }
 
 /**
