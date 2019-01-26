@@ -21,7 +21,7 @@ SRC += main.c startup.c
 #SRC += ./sys/src/ev.c
 
 # devices
-#SRC += ./dev/src/watchdog.c ./dev/src/debug.c 
+SRC += ./dev/src/led.c
 #SRC += ./dev/src/cpuclock.c ./dev/src/usart1.c 
 #SRC += ./dev/src/power.c ./dev/src/extimux.c 
 #SRC += ./dev/src/systime.c ./dev/src/spisw.c
