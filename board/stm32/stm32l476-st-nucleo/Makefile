@@ -22,11 +22,7 @@ SRC += main.c startup.c
 
 # devices
 SRC += ./dev/src/led.c ./dev/src/button.c
-#SRC += ./dev/src/cpuclock.c ./dev/src/usart1.c 
-#SRC += ./dev/src/power.c ./dev/src/extimux.c 
-#SRC += ./dev/src/systime.c ./dev/src/spisw.c
-#SRC += ./dev/src/lc72131.c ./dev/src/buttons.c
-#SRC += ./dev/src/bu1924.c
+SRC += ./dev/src/wwdg.c
 
 # rds decodes
 #SRC += ./rds/src/rds.c

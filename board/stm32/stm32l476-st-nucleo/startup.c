@@ -9,6 +9,7 @@
 #include <stm32l476/rcc.h>
 #include <stm32l476/nvic.h>
 #include <dev/button.h>
+#include <dev/wwdg.h>
 
 /* data pointers */
 /* bss section */
@@ -142,7 +143,7 @@ uint32_t vectors[] __attribute__ ((section(".vectors"))) = {
 
 
 	/* 0: WWDG */
-	(uint32_t)DefaultHandler,
+	(uint32_t)Watchdog_WWDGIsr,
 	/* 1: EXTI16 / PVD */
 	(uint32_t)DefaultHandler,
 	/* 2: EXTI21 / TAMP_STAMP */
