@@ -31,6 +31,11 @@ void led_off(void)
     GPIOA->ODR &= ~(0x01 << 5);
 }
 
+void led_toggle(void)
+{
+    GPIOA->ODR ^= (0x01 << 5);
+}
+
 static void delay(unsigned int num)
 {
     volatile int i = 1000;
@@ -47,9 +52,7 @@ void led_test(void)
     led_init();
     for(i_loop = 0;i_loop < 10 ;i_loop++)
     {
-        led_on();
-        delay(100);
-        led_off();
+        led_toggle();
         delay(100);
     }
 }

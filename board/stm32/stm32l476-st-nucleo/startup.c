@@ -8,6 +8,8 @@
 #include <stm32l476/scb.h>
 #include <stm32l476/rcc.h>
 #include <stm32l476/nvic.h>
+#include <dev/button.h>
+#include <dev/wwdg.h>
 
 /* data pointers */
 /* bss section */
@@ -141,7 +143,7 @@ uint32_t vectors[] __attribute__ ((section(".vectors"))) = {
 
 
 	/* 0: WWDG */
-	(uint32_t)DefaultHandler,
+	(uint32_t)Watchdog_WWDGIsr,
 	/* 1: EXTI16 / PVD */
 	(uint32_t)DefaultHandler,
 	/* 2: EXTI21 / TAMP_STAMP */
@@ -221,7 +223,7 @@ uint32_t vectors[] __attribute__ ((section(".vectors"))) = {
 	/* 39: USART3 */
 	(uint32_t)DefaultHandler,
 	/* 40: EXTI10_15 */
-	(uint32_t)DefaultHandler,
+	(uint32_t)Buttons_Exti13Isr,
 	/* 41: EXTI17/RTC_ALARM */
 	(uint32_t)DefaultHandler,
 	/* 42: DFSDM3 */

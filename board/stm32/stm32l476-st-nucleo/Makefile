@@ -5,7 +5,7 @@ SW_VER = 1.0.0
 HW_VER = 1.0
 
 # output name
-TARGET = tuner
+TARGET = nucleo_l476
 
 # linker script
 LD_SCRIPT = stm32l476rgt6.ld
@@ -21,12 +21,8 @@ SRC += main.c startup.c
 #SRC += ./sys/src/ev.c
 
 # devices
-SRC += ./dev/src/led.c
-#SRC += ./dev/src/cpuclock.c ./dev/src/usart1.c 
-#SRC += ./dev/src/power.c ./dev/src/extimux.c 
-#SRC += ./dev/src/systime.c ./dev/src/spisw.c
-#SRC += ./dev/src/lc72131.c ./dev/src/buttons.c
-#SRC += ./dev/src/bu1924.c
+SRC += ./dev/src/led.c ./dev/src/button.c
+SRC += ./dev/src/wwdg.c
 
 # rds decodes
 #SRC += ./rds/src/rds.c
@@ -101,4 +97,4 @@ map: $(TARGET).elf
 
 # cleanser xD
 clean:
-	$(RM) -f $(OBJ) $(OUTPUT).bin $(TARGET).lst $(TARGET).elf $(TARGET).map
+	$(RM) -f $(OBJ) $(OUTPUT).bin $(TARGET).lst $(TARGET).elf $(TARGET).map $(OUTPUT).map 
