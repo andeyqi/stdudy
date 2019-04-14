@@ -4,6 +4,10 @@
 #include <stm32l476/exti.h>
 #include <stm32l476/nvic.h>
 #include <dev/led.h> 
+#include <dev/button.h> 
+#include <stdlib.h>
+
+static button_callback g_func = NULL;
 
 void button_init(void)
 {
@@ -36,10 +40,12 @@ void Buttons_Exti13Isr(void)
 	/* button down is falling trigger up is rising trigger */
 	if(GPIOC->IDR & (0x01 << 13))
 	{
-		led_off();
+		if(g_func)
+			g_func();
 	}
-	else
-	{
-		led_on();
-	}
+}
+
+void register_user_button_func(button_callback func)
+{
+	g_func = func;
 }

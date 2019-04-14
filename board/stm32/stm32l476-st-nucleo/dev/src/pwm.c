@@ -1,6 +1,7 @@
 #include <stm32l476/rcc.h>
 #include <stm32l476/timer.h>
 #include <stm32l476/gpio.h>
+#include <dev/button.h>
 
 void pwm_init(void)
 {
@@ -30,5 +31,32 @@ void pwm_init(void)
 	TIM2->CR1 |= TIM_CR1_ARPE;
 	/* 2.3 设置自动加载计数值 */
 	TIM2->ARR = 10000/100 -1;
+	/* 2.4 设定PWM工作模式1 */
+	TIM2->CCMR1 &= ~TIM_CCMR1_OC1M;
+	TIM2->CCMR1 |= TIM_CCMR1_OC1M_2 | TIM_CCMR1_OC1M_1;
+	/* 2.5 设置PWM模式占空比 */
+	TIM2->CCR1 = 0;
+	/* 2.6 Output Compare 1 preload enable */
+	TIM2->CCMR1 |= TIM_CCMR1_OC1PE;
+	/* 2.7 Enable output channel 1 */
+	TIM2->CCER |= TIM_CCER_CC1E;
+	/* 2.8 Enable counter */
+	TIM2->CR1 |= TIM_CR1_CEN;
+	/* 2.9 Force update generation */
+	TIM2->EGR |= TIM_EGR_UG;
 	/* 启动定时器 */
+}
+
+static void pwm_set_value(int value)
+{
+	TIM2->CCR1 = (TIM2->ARR+1)*value/100;
+}
+
+void update_pwm_value(void)
+{
+	static int value = 0;
+	pwm_set_value(value);
+	value += 10;
+	if(value == 110)
+		value = 0;
 }

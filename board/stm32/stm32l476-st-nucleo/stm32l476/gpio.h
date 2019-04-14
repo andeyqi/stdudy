@@ -310,6 +310,7 @@ typedef struct {
 #define GPIO_AFRL_AFRL3            			(0x0000F000)
 #define GPIO_AFRL_AFRL4            			(0x000F0000)
 #define GPIO_AFRL_AFRL5            			(0x00F00000)
+#define GPIO_AFRL_AFRL5_AF1        			(0x01<<(5*4))
 #define GPIO_AFRL_AFRL6            			(0x0F000000)
 #define GPIO_AFRL_AFRL7            			(0xF0000000)
 

@@ -22,7 +22,7 @@ SRC += main.c startup.c
 
 # devices
 SRC += ./dev/src/led.c ./dev/src/button.c
-SRC += ./dev/src/wwdg.c
+SRC += ./dev/src/wwdg.c ./dev/src/pwm.c
 
 # rds decodes
 #SRC += ./rds/src/rds.c
