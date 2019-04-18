@@ -20,7 +20,7 @@ static void pwm2_ch1_init(void)
 	GPIOA->AFRL |= GPIO_AFRL_AFRL5_AF1;
 	/* 2.4 配置引脚输出速度 */
 	GPIOA->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR5;
-	GPIOA->OSPEEDR |= ~GPIO_OSPEEDER_OSPEEDR5_1;
+	GPIOA->OSPEEDR |= GPIO_OSPEEDER_OSPEEDR5_1;
 	/* TIMER 配置 */
 	/* 1.开启TIMER时钟 */
 	RCC->APB1ENR1 |= RCC_APB1ENR1_TIM2EN;
@@ -64,7 +64,7 @@ static void pwm2_ch3_init(void)
 	GPIOA->AFRL |= GPIO_AFRL_AFRL2_AF1;
 	/* 2.4 配置引脚输出速度 */
 	GPIOA->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR2;
-	GPIOA->OSPEEDR |= ~GPIO_OSPEEDER_OSPEEDR2_1;
+	GPIOA->OSPEEDR |= GPIO_OSPEEDER_OSPEEDR2_1;
 	/* TIMER 配置 */
 	/* 1.开启TIMER时钟 */
 	RCC->APB1ENR1 |= RCC_APB1ENR1_TIM2EN;
@@ -79,7 +79,7 @@ static void pwm2_ch3_init(void)
 	TIM2->CCMR2 &= ~TIM_CCMR2_OC3M;
 	TIM2->CCMR2 |= TIM_CCMR2_OC3M_2 | TIM_CCMR2_OC3M_1;
 	/* 2.5 设置PWM模式占空比 */
-	TIM2->CCR1 = 0;
+	TIM2->CCR3 = 50;
 	/* 2.6 Output Compare 1 preload enable */
 	TIM2->CCMR2 |= TIM_CCMR2_OC3PE;
 	/* 2.7 Enable output channel 1 */
@@ -100,6 +100,7 @@ void pwm_init(void)
 static void pwm_set_value(int value)
 {
 	TIM2->CCR1 = (TIM2->ARR+1)*value/100;
+	TIM2->CCR3 = (TIM2->ARR+1)*(value+10)/100;
 }
 
 void update_pwm_value(void)
