@@ -63,7 +63,7 @@ OBJ = $(SRC:%.c=%.o)
 OUTPUT = $(TARGET)_$(SW_VER)
 
 # generate elf and bin
-all: $(TARGET).elf $(OUTPUT).bin $(TARGET).lst map size
+all: $(TARGET).elf $(OUTPUT).bin $(TARGET).lst $(TARGET).dis map size
 
 # generate elf file from objs
 $(TARGET).elf: $(OBJ)
@@ -79,6 +79,11 @@ $(OUTPUT).bin: $(TARGET).elf
 $(TARGET).lst: $(TARGET).elf
 	@ $(ECHO) ---------------------    Listing   ---------------------
 	$(OBD) -S $< > $@
+
+# geneate disassembling
+$(TARGET).dis: $(TARGET).elf
+	@ $(ECHO) ---------------------    disassembling   ---------------------
+	$(OBD) -s -D $< > $@
 
 # compile all sources
 %.o : %.c
@@ -97,4 +102,4 @@ map: $(TARGET).elf
 
 # cleanser xD
 clean:
-	$(RM) -f $(OBJ) $(OUTPUT).bin $(TARGET).lst $(TARGET).elf $(TARGET).map $(OUTPUT).map 
+	$(RM) -f $(OBJ) $(OUTPUT).bin $(TARGET).lst $(TARGET).dis $(TARGET).elf $(TARGET).map $(OUTPUT).map 
